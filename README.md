@@ -1,7 +1,10 @@
 # RAMP Starting kit on Suicide Rate Prediction
 *Authors: Wissam Gherissi, Zadem Mehdi, Nader Beltaief, Abouda Khmayes*
+
 **Project Description ** 
+
 ** Set up **
+
 Open a terminal and
 1. install the ramp-workflow library (if not already done)
   ```
