@@ -14,6 +14,7 @@ Open a terminal and
 
 **Local Notebook**
 Get started on this RAMP with the [notebook](noteboook link).
+
 To test the starting-kit, run
   ```
   ramp_test_submission --quick-test
