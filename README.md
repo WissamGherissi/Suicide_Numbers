@@ -1,4 +1,4 @@
-# RAMP Starting kit on Suicide Rate Prediction
+# RAMP Starting kit on Suicide Numbers Prediction
 *Authors: Wissam Gherissi, Zadem Mehdi, Nader Beltaief, Abouda Khmayes*
 
 ### Project Description 
