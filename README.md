@@ -1,5 +1,5 @@
 # RAMP Starting kit on Suicide Numbers Prediction
-*Authors: Wissam Gherissi, Mehdi Zadem , Nader Beltaief, Khmayes Abouda *
+* Authors: Wissam Gherissi, Mehdi Zadem , Nader Beltaief, Khmayes Abouda *
 
 ### Description 
 Since the 1900s, sociologists have been studying the intriguing phenomenon of suicide. Multiple studies have been published concerning this subject. Each study uses different features trying to understand the major causes of suicide. In our case, we want to conduct a statistical study of this happenening introducing some indicators that may have influence over the evolution of suicide rates over the years. Innovation in machine learning may allow us to have a deeper insight about suicide rates per country or per generation in order to put in devise strategies that target the categories of people more likely to commit suicide.
