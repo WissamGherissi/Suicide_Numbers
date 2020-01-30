@@ -6,7 +6,7 @@ from rampwf.workflows import FeatureExtractorRegressor
 from rampwf.score_types.base import BaseScoreType
 from sklearn.model_selection import GroupShuffleSplit
 from sklearn.model_selection import ShuffleSplit
-from sklearn.metrics import mean_squared_error
+from sklearn.metrics import mean_absolute_error
 
 problem_title = 'Prediction of Suicide Numbers'
 _target_column_name = 'suicides_no'
@@ -16,7 +16,6 @@ Predictions = rw.prediction_types.make_regression(
 
 workflow = rw.workflows.FeatureExtractorRegressor()
 
-# define the score (specific score for the FAN problem)
 class Suicide_error(BaseScoreType):
     is_lower_the_better = True
     minimum = 0.0
@@ -27,8 +26,7 @@ class Suicide_error(BaseScoreType):
         self.precision = precision
 
     def __call__(self, y_true, y_pred):
-        if isinstance(y_true, pd.Series):
-            loss = mean_squared_error(y_true,y_pred)
+        loss = np.mean(np.abs(y_true.reshape(len(y_true),1)-y_pred.reshape(len(y_pred),1))*(y_true**2)/np.max(y_true**2))
         return loss
 
 
@@ -38,28 +36,27 @@ score_types = [
 
 
 def get_cv(X, y):
-    cv = ShuffleSplit(n_splits=8, test_size=0.20)
+    cv = ShuffleSplit(n_splits=8, test_size=0.1)
     return cv.split(X, y)
 
 
 def _read_data(path, f_name):
-    data = pd.read_csv(os.path.join(path, '/data', f_name), low_memory=False)
-    #data = data.sample(frac=0.1, replace=False, random_state=1)
+    data = pd.read_csv(os.path.join(path, 'data', f_name), low_memory=False)
     y_array = data[_target_column_name].values
     X_df = data.drop(_target_column_name, axis=1)
     test = os.getenv('RAMP_TEST_MODE', 0)
     if test:
-        return X_df[::30], y_array[::30]
+        return X_df[::30], y_array[::30].reshape(len(y_array[::30]),1)
     else:
-        return X_df, y_array
-    return X_df, y_array
+        return X_df, y_array.reshape(len(y_array),1)
+    return X_df, y_array.reshape(len(y_array),1)
 
 
 def get_train_data(path='.'):
-    f_name = '/Suicide_TRAIN.csv'
+    f_name = 'suicide_train.csv'
     return _read_data(path, f_name)
 
 
 def get_test_data(path='.'):
-    f_name = '/Suicide_TEST.csv'
+    f_name = 'suicide_test.csv'
     return _read_data(path, f_name)
