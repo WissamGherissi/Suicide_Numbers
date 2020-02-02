@@ -26,7 +26,7 @@ class Suicide_error(BaseScoreType):
         self.precision = precision
 
     def __call__(self, y_true, y_pred):
-        loss = np.mean(np.abs(y_true.reshape(len(y_true),1)-y_pred.reshape(len(y_pred),1))*(y_true**2)/np.max(y_true**2))
+        loss = np.mean(np.abs(y_true.reshape(len(y_true),1)-y_pred.reshape(len(y_pred),1))*(y_true/np.max(y_true)))
         return loss
 
 
